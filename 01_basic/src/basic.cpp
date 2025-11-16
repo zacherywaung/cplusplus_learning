@@ -38,6 +38,7 @@ int main()
     std::cout << "y = " << y << std::endl;
     std::cout << "zw::x = " << zw::x << std::endl;
     std::cout << "zw::y = " << zw::y << std::endl;
+    std::cout << "x + y = " << ADD(x, y) << std::endl;
 
     return 0;
 }
