@@ -1,42 +1,42 @@
-#include"../include/test.h"
+#include"../include/date.h"
 
 typedef int STDataType;
 
-class Date
-{
-public:
-    // //无参构造函数
-    // Date()
-    // {
-    //     _year = 1;
-    //     _month = 1;
-    //     _day = 1;
-    // }
-    // //带参构造函数
-    // Date(int year, int month, int day)
-    // {
-    //     _year = year;
-    //     _month = month;
-    //     _day = day;
-    // }
-    //全缺省构造函数
-    Date(int year = 2000, int month = 1, int day = 1)
-    {
-        _year = year;
-        _month = month;
-        _day = day;
-    }
+// class Date
+// {
+// public:
+//     // //无参构造函数
+//     // Date()
+//     // {
+//     //     _year = 1;
+//     //     _month = 1;
+//     //     _day = 1;
+//     // }
+//     // //带参构造函数
+//     // Date(int year, int month, int day)
+//     // {
+//     //     _year = year;
+//     //     _month = month;
+//     //     _day = day;
+//     // }
+//     //全缺省构造函数
+//     Date(int year = 2000, int month = 1, int day = 1)
+//     {
+//         _year = year;
+//         _month = month;
+//         _day = day;
+//     }
 
-    void PrintDate()
-    {
-        cout << this->_year << "/" << this->_month << "/" << this->_day << endl;
-    }
+//     void PrintDate()
+//     {
+//         cout << this->_year << "/" << this->_month << "/" << this->_day << endl;
+//     }
 
-private:
-    int _year;
-    int _month;
-    int _day;
-};
+// private:
+//     int _year;
+//     int _month;
+//     int _day;
+// };
 
 class Stack
 {
@@ -116,24 +116,38 @@ private:
 
 int main()
 {
-    Date d1(2025, 11);
-    Date d2;
+    // Date d1(2025, 11);
+    // Date d2;
+    // d1.PrintDate();
+    // d2.PrintDate();
+    // Stack st(8);
+    // st.Push(1);
+    // st.Push(2);
+    // st.Push(3);
+    // st.Push(4);
+    // st.Push(5);
+
+    // while(! st.IsEmpty())
+    // {
+    //     cout << st.Top() << endl;
+    //     st.Pop();
+    // }
+
+    // MyQueue mq;
+    // cout << zw::a + zw::b << endl; 
+    // return 0;
+
+    Date d1(2025, 11, 21);
+    Date d2 = d1;
+    Date d3(2024, 1, 1);
     d1.PrintDate();
     d2.PrintDate();
-    Stack st(8);
-    st.Push(1);
-    st.Push(2);
-    st.Push(3);
-    st.Push(4);
-    st.Push(5);
+    d3.PrintDate();
+    d1 += 10000;
+    d1.PrintDate();
+    d1 -= 10000;
+    d1.PrintDate();
+    if(d1 >= d2)
+        cout << "d1 >= d2" << endl;
 
-    while(! st.IsEmpty())
-    {
-        cout << st.Top() << endl;
-        st.Pop();
-    }
-
-    MyQueue mq;
-    cout << zw::a + zw::b << endl; 
-    return 0;
 }
