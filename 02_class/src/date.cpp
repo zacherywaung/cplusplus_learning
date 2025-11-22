@@ -5,16 +5,6 @@ void Date::PrintDate()
     cout << _year << "/" << _month << "/" << _day << endl;
 }
 
-int Date::GetMonthDay(int year, int month)
-{
-    int month_day_array[] = {-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if(month == 2 && ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)))
-    {
-        return 29;
-    }
-    return month_day_array[month];
-}
-
 Date::Date(int year, int month, int day)
 {
     _year = year;
@@ -123,7 +113,7 @@ Date& Date::operator--()
     return *this;
 }
 
-bool Date::operator>(const Date& d)
+bool Date::operator>(const Date& d) const
 {
     if(_year > d._year)
         return true;
@@ -142,29 +132,71 @@ bool Date::operator>(const Date& d)
     }
 }
 
-bool Date::operator==(const Date& d)
+bool Date::operator==(const Date& d) const
 {
     return (_year == d._year && _month == d._month && _day == d._day);
 }
 
-bool Date::operator >= (const Date& d)
+bool Date::operator >= (const Date& d) const
 {
     return (*this > d || *this == d);
 }
 
-bool Date::operator < (const Date& d)
+bool Date::operator < (const Date& d) const
 {
     return !(*this >= d);
 }
 
-bool Date::operator <= (const Date& d)
+bool Date::operator <= (const Date& d) const
 {
     return !(*this > d);
 }
 
-bool Date::operator != (const Date& d)
+bool Date::operator != (const Date& d) const
 {
     return !(*this == d);
 }
 
-int operator-(const Date& d);
+Date* Date::operator&()
+{
+    return this;
+}
+
+const Date* Date::operator&() const
+{
+    return this;
+}
+
+int Date::operator-(const Date& d)
+{
+    int n = 0;
+    int flag = -1;
+    Date min = *this;
+    Date max = d;
+    if(min > max)
+    {
+        min = d;
+        max = *this;
+        flag = 1;
+    }
+    while(min != max)
+    {
+        min++;
+        n++;
+    }
+    return flag*n;
+}
+
+ostream& operator<<(ostream& out, const Date& d)
+{
+    out << d._year << "/" << d._month << "/" << d._day << endl;
+    return out;
+}
+
+
+istream& operator>>(istream& in, Date& d)
+{
+    cout << "please enter date: ";
+    in >> d._year >> d._month >> d._day;
+    return in;
+}

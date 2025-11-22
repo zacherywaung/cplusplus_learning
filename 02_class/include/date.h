@@ -4,10 +4,21 @@ using namespace std;
 
 class Date
 {
+    friend ostream& operator<<(ostream& out, const Date& d);
+    friend istream& operator>>(istream& out, Date& d);
 public:
 void PrintDate();
-// 获取某年某月的天数
-int GetMonthDay(int year, int month);
+// 获取某年某月的天数 inline
+int GetMonthDay(int year, int month)
+{
+    int month_day_array[] = {-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if(month == 2 && ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)))
+    {
+        return 29;
+    }
+    return month_day_array[month];
+}
+
 // 全缺省的构造函数
 Date(int year = 1900, int month = 1, int day = 1);
 // 拷贝构造函数
@@ -35,17 +46,20 @@ Date operator--(int);
 // 前置--
 Date& operator--();
 // >运算符重载
-bool operator>(const Date& d);
+bool operator>(const Date& d) const;
 // ==运算符重载
-bool operator==(const Date& d);
+bool operator==(const Date& d) const;
 // >=运算符重载
-bool operator >= (const Date& d);
+bool operator >= (const Date& d) const;
 // <运算符重载
-bool operator < (const Date& d);
+bool operator < (const Date& d) const;
 // <=运算符重载
-bool operator <= (const Date& d);
+bool operator <= (const Date& d) const;
 // !=运算符重载
-bool operator != (const Date& d);
+bool operator != (const Date& d) const;
+// &运算符重载
+Date* operator&();
+const Date* operator&() const;
 // 日期-日期 返回天数
 int operator-(const Date& d);
 private:
@@ -53,3 +67,6 @@ int _year;
 int _month;
 int _day;
 };
+// << >> 重载
+ostream& operator<<(ostream& out, const Date& d);
+istream& operator>>(istream& out, Date& d);

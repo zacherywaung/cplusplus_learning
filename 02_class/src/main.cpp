@@ -149,5 +149,8 @@ int main()
     d1.PrintDate();
     if(d1 >= d2)
         cout << "d1 >= d2" << endl;
-
+    cout << d1 - d3 << endl;
+    cout << &d1 << endl;
+    cin >> d3;
+    cout << d3;
 }
