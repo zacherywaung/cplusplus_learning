@@ -8,7 +8,7 @@
             "name": "(lldb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/${workspaceRootFolderName}",
+            "program": "${workspaceFolder}/code_leetcode/08_string_to_integer",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

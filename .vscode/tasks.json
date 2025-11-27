@@ -8,9 +8,9 @@
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
-				"${workspaceFolder}/src/*.cpp",
+				"${workspaceFolder}/code_leetcode/08_string_to_integer.cpp",
 				"-o",
-				"${workspaceFolder}/${workspaceRootFolderName}"
+				"${workspaceFolder}/code_leetcode/08_string_to_integer"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
