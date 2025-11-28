@@ -8,9 +8,9 @@
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
-				"${workspaceFolder}/code_leetcode/08_string_to_integer.cpp",
+				"${workspaceFolder}/code_leetcode/125_valid_palindrome.cpp",
 				"-o",
-				"${workspaceFolder}/code_leetcode/08_string_to_integer"
+				"${workspaceFolder}/code_leetcode/125_valid_palindrome"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
