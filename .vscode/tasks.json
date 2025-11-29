@@ -8,9 +8,9 @@
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
-				"${workspaceFolder}/code_leetcode/125_valid_palindrome.cpp",
+				"${workspaceFolder}/code_leetcode/557_reverse_words_in_string3.cpp",
 				"-o",
-				"${workspaceFolder}/code_leetcode/125_valid_palindrome"
+				"${workspaceFolder}/code_leetcode/557_reverse_words_in_string3"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
