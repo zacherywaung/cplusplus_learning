@@ -8,13 +8,10 @@ namespace zw
     class string
     {
 
-        friend ostream& operator<<(ostream& _cout, const zw::string& s);
-
-        friend istream& operator>>(istream& _cin, zw::string& s);
-
     public:
 
         typedef char* iterator;
+        typedef const char* const_iterator;
 
     public:
 
@@ -36,10 +33,14 @@ namespace zw
 
         string& operator=(const string &s)
         {
-            _size = s._size;
-            _capacity = s._capacity;
-            _str = new char[s._capacity + 1];
-            strcpy(_str, s._str);
+            if(this != &s)
+            {
+                delete[] _str;
+                _size = s._size;
+                _capacity = s._capacity;
+                _str = new char[s._capacity + 1];
+                strcpy(_str, s._str);
+            }
             return *this;
         }
 
@@ -61,6 +62,16 @@ namespace zw
         }
 
         iterator end()
+        {
+            return _str + _size;
+        }
+
+        const_iterator begin()const
+        {
+            return _str;
+        }
+
+        const_iterator end()const
         {
             return _str + _size;
         }
@@ -145,26 +156,6 @@ namespace zw
             return _str[index];
         }
 
-
-
-        /////////////////////////////////////////////////////////////
-
-        //relational operators
-
-        bool operator<(const string& s);
-
-        bool operator<=(const string& s);
-
-        bool operator>(const string& s);
-
-        bool operator>=(const string& s);
-
-        bool operator==(const string& s);
-
-        bool operator!=(const string& s);
-
-
-
         // 返回c在string中第一次出现的位置
 
         size_t find (char c, size_t pos = 0) const;
@@ -184,6 +175,10 @@ namespace zw
         // 删除pos位置上的元素，并返回该元素的下一个位置
 
         string& erase(size_t pos, size_t len);
+         
+        // 返回指定位置指定长度的子字符串
+
+        string substr(size_t pos = 0, size_t len = npos);
 
     private:
 
@@ -193,6 +188,29 @@ namespace zw
 
         size_t _size;
 
+        static const size_t npos;
+
     };
+
+
+    /////////////////////////////////////////////////////////////
+
+    //relational operators
+
+    bool operator<(const string& s1, const string& s2);
+
+    bool operator<=(const string& s1, const string& s2);
+
+    bool operator>(const string& s1, const string& s2);
+
+    bool operator>=(const string& s1, const string& s2);
+
+    bool operator==(const string& s1, const string& s2);
+
+    bool operator!=(const string& s1, const string& s2);
+
+    ostream& operator<<(ostream& _cout, const zw::string& s);
+
+    istream& operator>>(istream& _cin, zw::string& s);
 
 }

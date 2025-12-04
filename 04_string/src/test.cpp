@@ -70,12 +70,56 @@ void Test5_modify()
     cout << "-----------" << endl;
 }
 
+void Test6_find_insert_erase()
+{
+    zw::string s("hello world");
+    cout << s.find('l', 5) << endl; // 9
+    cout << s.find('l') << endl; // 2
+    cout << s.find("rld", 5) << endl; // 8
+    cout << s.find("hello", 5) << endl; // npos
+    s.insert(5, 'x');
+    cout << s.c_str() << endl; // hellox world
+    s.insert(5, "&&&&&");
+    cout << s.c_str() << endl; // hello&&&&&x world
+    s.erase(5, 5);
+    cout << s.c_str() << endl; // hellox world
+    s.erase(5, 100);
+    cout << s.c_str() << endl; // hello
+    zw::string sub_1 = s.substr(2);
+    zw::string sub_2 = s.substr(2, 2);
+    cout << sub_1.c_str() << endl; // llo
+    cout << sub_2.c_str() << endl; // ll
+
+    
+}
+
+void Test7_iostream()
+{
+    zw::string s1("hello world");
+    zw::string s2;
+    cout << s1 << endl;
+    cin >> s1 >> s2;
+    cout << s1 << endl;
+    cout << s2 << endl;
+
+}
+
+void Test8_operator()
+{
+    zw::string s1("abcdefg");
+    zw::string s2("abddefg");
+    cout << (s1 < s2) << endl;
+}
+
 int main()
 {
     //Test1_create();
     //Test2_capacity();
-    // Test3_access();
-    // Test4_iterator();
-    Test5_modify();
+    //Test3_access();
+    //Test4_iterator();
+    //Test5_modify();
+    //Test6_find_insert_erase();
+    //Test7_iostream();
+    Test8_operator();
     return 0;
 }
