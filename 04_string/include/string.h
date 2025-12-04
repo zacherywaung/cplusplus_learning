@@ -10,6 +10,7 @@ namespace zw
 
     public:
 
+        static const size_t npos;
         typedef char* iterator;
         typedef const char* const_iterator;
 
@@ -23,24 +24,50 @@ namespace zw
             strcpy(_str, str);
         }
 
-        string(const string& s)
+        // string(const string& s)
+        // {
+        //     _size = s._size;
+        //     _capacity = s._capacity;
+        //     _str = new char[s._capacity + 1];
+        //     strcpy(_str, s._str);
+        // }
+
+        void swap(string& s)
         {
-            _size = s._size;
-            _capacity = s._capacity;
-            _str = new char[s._capacity + 1];
-            strcpy(_str, s._str);
+            std::swap(_str, s._str);
+            std::swap(_size, s._size);
+            std::swap(_capacity, s._capacity);
         }
 
-        string& operator=(const string &s)
+        string(const string& s)
         {
-            if(this != &s)
-            {
-                delete[] _str;
-                _size = s._size;
-                _capacity = s._capacity;
-                _str = new char[s._capacity + 1];
-                strcpy(_str, s._str);
-            }
+            string tmp(s._str);
+            swap(tmp);
+        }
+
+        // string& operator=(const string &s)
+        // {
+        //     if(this != &s)
+        //     {
+        //         delete[] _str;
+        //         _size = s._size;
+        //         _capacity = s._capacity;
+        //         _str = new char[s._capacity + 1];
+        //         strcpy(_str, s._str);
+        //     }
+        //     return *this;
+        // }
+
+        // string& operator=(const string &s)
+        // {
+        //     string tmp(s._str);
+        //     swap(tmp);  
+        //     return *this;
+        // }
+
+        string& operator=(string tmp)
+        {
+            swap(tmp);
             return *this;
         }
 
@@ -91,8 +118,6 @@ namespace zw
         string& operator+=(const char* str);
 
         void clear();
-
-        void swap(string& s);
 
         const char* c_str()const;
 
@@ -182,13 +207,11 @@ namespace zw
 
     private:
 
-        char* _str;
+        char* _str = nullptr;
 
-        size_t _capacity;
+        size_t _capacity = 0;
 
-        size_t _size;
-
-        static const size_t npos;
+        size_t _size = 0;
 
     };
 

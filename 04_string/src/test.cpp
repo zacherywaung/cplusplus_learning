@@ -3,10 +3,15 @@
 void Test1_create()
 {
     zw::string s1 = "hello world";
+    cout << s1 << endl;
     zw::string s2("hello world");
+    cout << s2 << endl;
     zw::string s3(s2);
+    cout << s3 << endl;
     zw::string s4;
+    cout << s4 << endl;
     s4 = s3;
+    cout << s4 << endl;
 }
 
 void Test2_capacity()
@@ -113,13 +118,13 @@ void Test8_operator()
 
 int main()
 {
-    //Test1_create();
+    Test1_create();
     //Test2_capacity();
     //Test3_access();
     //Test4_iterator();
     //Test5_modify();
     //Test6_find_insert_erase();
     //Test7_iostream();
-    Test8_operator();
+    //Test8_operator();
     return 0;
 }

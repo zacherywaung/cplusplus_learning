@@ -56,23 +56,23 @@ namespace zw
         _size = 0;
     }
 
-    void string::swap(string& s)
-    {
-        //swap _str
-        char* tmp_str = _str;
-        _str = s._str;
-        s._str = tmp_str;
+    // void string::swap(string& s)
+    // {
+    //     //swap _str
+    //     char* tmp_str = _str;
+    //     _str = s._str;
+    //     s._str = tmp_str;
 
-        //swap _size
-        size_t tmp_size = _size;
-        _size = s._size;
-        s._size = tmp_size;
+    //     //swap _size
+    //     size_t tmp_size = _size;
+    //     _size = s._size;
+    //     s._size = tmp_size;
 
-        //swap _capacity
-        size_t tmp_capacity = _capacity;
-        _capacity = s._capacity;
-        s._capacity = tmp_capacity;
-    }
+    //     //swap _capacity
+    //     size_t tmp_capacity = _capacity;
+    //     _capacity = s._capacity;
+    //     s._capacity = tmp_capacity;
+    // }
 
     const char* string::c_str()const
     {
