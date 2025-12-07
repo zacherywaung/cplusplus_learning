@@ -6,11 +6,12 @@
 			"label": "C/C++: g++ 生成活动文件",
 			"command": "/usr/bin/g++",
 			"args": [
+				"-std=c++11",
 				"-fdiagnostics-color=always",
 				"-g",
-				"${workspaceFolder}/code_leetcode/557_reverse_words_in_string3.cpp",
+				"${workspaceFolder}/code_leetcode/137_single_number2.cpp",
 				"-o",
-				"${workspaceFolder}/code_leetcode/557_reverse_words_in_string3"
+				"${workspaceFolder}/code_leetcode/137_single_number2"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
