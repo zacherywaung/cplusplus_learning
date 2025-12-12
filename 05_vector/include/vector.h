@@ -96,7 +96,7 @@ namespace zw
         swap(tmp);
     }
 
-    clear()
+    void clear()
     {
         _finish = _start;
     }
@@ -155,7 +155,7 @@ namespace zw
         {
             T* tmp = new T[n];
             size_t old_size = size();
-            for(size_t i = 0; i < n; i++)
+            for(size_t i = 0; i < old_size; i++)
             {
                 tmp[i] = _start[i];
             }

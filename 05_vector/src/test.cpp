@@ -99,12 +99,24 @@ void Test5()
 
 }
 
+void Test6()
+{
+    zw::vector<string> v;
+    v.push_back("11111111");
+    v.push_back("11111111");
+    v.push_back("11111111");
+    v.push_back("11111111");
+    v.print_vector();
+
+}
+
 int main()
 {
-    Test1();
+    //Test1();
     //Test2();
     //Test3();
     //Test4();
     //Test5();
+    Test6();
     return 0;
 }
