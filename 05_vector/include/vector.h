@@ -52,24 +52,43 @@ namespace zw
         _finish = _end_of_storage = _start + n;
     }
 
+    // template<class InputIterator>
+    // vector(InputIterator first, InputIterator last)
+    // {
+    //     size_t n = 0;
+    //     for(InputIterator it = first; it != last; it++)
+    //     {
+    //         n++;
+    //     }
+    //     _start = new T[n];
+    //     _finish = _end_of_storage = _start + n;
+    //     T* dest = _start;
+    //     while(dest != _finish)
+    //     {
+    //         *dest = *first;
+    //         ++dest;
+    //         ++first;
+    //     }
+    // }
+
     template<class InputIterator>
     vector(InputIterator first, InputIterator last)
     {
-        size_t n = 0;
-        for(InputIterator it = first; it != last; it++)
+        while(first != last)
         {
-            n++;
-        }
-        _start = new T[n];
-        _finish = _end_of_storage = _start + n;
-        T* dest = _start;
-        while(dest != _finish)
-        {
-            *dest = *first;
-            ++dest;
+            push_back(*first);
             ++first;
         }
     }
+
+    // vector(const vector<T>& v)
+    // {
+    //     reserve(v.capacity());
+    //     for(auto& e : v)
+    //     {
+    //         push_back(e);
+    //     }
+    // }
 
     vector(const vector<T>& v)
     {
@@ -77,17 +96,45 @@ namespace zw
         swap(tmp);
     }
 
+    clear()
+    {
+        _finish = _start;
+    }
+
+    // vector<T>& operator= (vector<T> v)
+    // {
+    //     if(this != &v)
+    //     {
+    //         clear();
+    //         reserve(v.size());
+    //         for(auto& e : v)
+    //         {
+    //             push_back(e);
+    //         }
+    //     }
+    //     return *this;
+    // }
+
+    // vector<T>& operator= (vector<T> v)
+    // {
+    //     vector<T> tmp(v._start, v._finish);
+    //     swap(tmp);
+    //     return *this;
+    // }
+
     vector<T>& operator= (vector<T> v)
     {
-        vector<T> tmp(v._start, v._finish);
-        swap(tmp);
+        swap(v);
         return *this;
     }
 
     ~vector()
     {
-        delete[] _start;
-        _start = _finish = _end_of_storage = nullptr;
+        if(_start)
+        {
+            delete[] _start;
+            _start = _finish = _end_of_storage = nullptr;
+        }
     }
 
     // capacity
@@ -158,7 +205,7 @@ namespace zw
     {
         if(_finish == _end_of_storage)
         {
-            reserve(capacity() == 4 ? 0 : 2*capacity());
+            reserve(capacity() == 0 ? 4 : 2*capacity());
         }
         *_finish = x;
         _finish++;

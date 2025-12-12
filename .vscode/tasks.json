@@ -9,9 +9,9 @@
 				"-std=c++11",
 				"-fdiagnostics-color=always",
 				"-g",
-				"${workspaceFolder}/code_leetcode/137_single_number2.cpp",
+				"${workspaceFolder}/code_leetcode/26_remove_duplicate_from_sorted_array.cpp",
 				"-o",
-				"${workspaceFolder}/code_leetcode/137_single_number2"
+				"${workspaceFolder}/code_leetcode/26_remove_duplicate_from_sorted_array"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
