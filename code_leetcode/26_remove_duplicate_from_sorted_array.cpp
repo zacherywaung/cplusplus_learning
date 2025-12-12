@@ -34,40 +34,61 @@
 #include<vector>
 using namespace std;
 
+// not recommmended
+// class Solution {
+// public:
+//     int removeDuplicates(vector<int>& nums) {
+//         int cur = nums[0];
+//         int i = 1;
+//         if(nums.size() == 1)
+//         {
+//             return 1;
+//         }
+//         int stop_sign = nums.back();
+//         if(nums[0] == stop_sign)
+//         {
+//             return 1;
+//         }
+//         while(nums[i] != stop_sign)
+//         {
+//             if(nums[i] == cur)
+//             {
+//                 int tmp = nums[i];
+//                 nums.erase(nums.begin() + i);
+//                 nums.push_back(tmp);
+//             }
+//             else{
+//                 cur = nums[i];
+//                 i++;
+//             }
+//         }
+//         return i+1;
+//     }
+// };
+
+// int main()
+// {
+//     vector<int> nums{1,2};
+//     cout << Solution().removeDuplicates(nums) << endl;
+//     return 0;
+// }
+
+// use double pointer
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        int cur = nums[0];
-        int i = 1;
-        if(nums.size() == 1)
+        int slow = 0;
+        int fast = 0;
+        while(fast < nums.size())
         {
-            return 1;
-        }
-        int stop_sign = nums.back();
-        if(nums[0] == stop_sign)
-        {
-            return 1;
-        }
-        while(nums[i] != stop_sign)
-        {
-            if(nums[i] == cur)
+            if(nums[slow] == nums[fast])
             {
-                int tmp = nums[i];
-                nums.erase(nums.begin() + i);
-                nums.push_back(tmp);
+                fast++;
             }
             else{
-                cur = nums[i];
-                i++;
+                nums[++slow] = nums[fast++];
             }
         }
-        return i+1;
+        return slow + 1;
     }
 };
-
-int main()
-{
-    vector<int> nums{1,2};
-    cout << Solution().removeDuplicates(nums) << endl;
-    return 0;
-}
