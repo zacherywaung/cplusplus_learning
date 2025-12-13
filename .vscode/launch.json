@@ -8,7 +8,7 @@
             "name": "(lldb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/code_leetcode/26_remove_duplicate_from_sorted_array",
+            "program": "${workspaceFolder}/code_leetcode/17_letter_combinations_of_phone_number",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

@@ -9,9 +9,9 @@
 				"-std=c++11",
 				"-fdiagnostics-color=always",
 				"-g",
-				"${workspaceFolder}/code_leetcode/26_remove_duplicate_from_sorted_array.cpp",
+				"${workspaceFolder}/code_leetcode/17_letter_combinations_of_phone_number.cpp",
 				"-o",
-				"${workspaceFolder}/code_leetcode/26_remove_duplicate_from_sorted_array"
+				"${workspaceFolder}/code_leetcode/17_letter_combinations_of_phone_number"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
