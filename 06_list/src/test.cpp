@@ -41,9 +41,26 @@ void Test1()
 
 }
 
+void Test2()
+{
+    zw::list<string> l1;
+    zw::list<string> l2;
+    l2.push_back("hello");
+    l2.push_back("hello");
+    l2.push_back("hello");
+    zw::PrintContainer(l2);
+    l1 = l2;
+    zw::PrintContainer(l1);
+    zw::list<string> l3(l2);
+    zw::PrintContainer(l3);
+
+}
+
+
 
 int main()
 {
-    Test1();
+    //Test1();
+    Test2();
     return 0;
 }

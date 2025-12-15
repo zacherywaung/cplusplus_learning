@@ -39,32 +39,47 @@ namespace zw
             _pnode = l._pnode;
         }
 
-        T& operator*()
+        Ref operator*()
         {
             return _pnode->_val;
         }
 
-        T* operator->();
+        Ptr operator->()
+        {
+            return &(_pnode->_val);
+        }
 
         Self& operator++()
         {
             _pnode = _pnode->_next;
             return *this;
         }
-        Self operator++(int);
+
+        Self operator++(int)
+        {
+            Self tmp = *this;
+            _pnode = _pnode->_next;
+            return tmp;
+        }
 
         Self& operator--()
         {
             _pnode = _pnode->_prev;
             return *this;
         }
-        Self& operator--(int);
 
-        bool operator!=(const Self& l)
+        Self operator--(int)
+        {
+            Self tmp = *this;
+            _pnode = _pnode->_prev;
+            return tmp;
+        }
+
+        bool operator!=(const Self& l) const
         {
             return _pnode != l._pnode;
         }
-        bool operator==(const Self& l)
+        bool operator==(const Self& l) const
         {
             return _pnode == l._pnode;
         }
@@ -82,11 +97,11 @@ namespace zw
         typedef Node* PNode;
     public:
         typedef ListIterator<T, T&, T*> iterator;
-        typedef ListIterator<T, const T&, const T&> const_iterator;
+        typedef ListIterator<T, const T&, const T*> const_iterator;
     public:
         ///////////////////////////////////////////////////////////////
         // List的构造
-        list()
+        void empty_init()
         {
             _head = new Node;
             _head->_next = _head;
@@ -94,13 +109,54 @@ namespace zw
             _size = 0;
         }
 
-        list(int n, const T& value = T());
+        list()
+        {
+            empty_init();
+        }
+
+        list(int n, const T& value = T())
+        {
+            empty_init();
+            while(n != 0)
+            {
+                push_back(value);
+                n--;
+            }
+        }
 
         template <class Iterator>
-        list(Iterator first, Iterator last);
-        list(const list<T>& l);
-        list<T>& operator=(const list<T> l);
-        // ~list();
+        list(Iterator first, Iterator last)
+        {
+            empty_init();
+            while(first != last)
+            {
+                push_back(*first);
+                ++first;
+            }
+        }
+
+        list(const list<T>& l)
+        {
+            empty_init();
+            for(auto& e : l)
+            {
+                push_back(e);
+            }
+        }
+
+        list<T>& operator=(list<T> l)
+        {
+            swap(l);
+            return *this;
+        }
+
+
+        ~list()
+        {
+            clear();
+            delete _head;
+            _head = nullptr;
+        }
 
 
         ///////////////////////////////////////////////////////////////
@@ -113,8 +169,14 @@ namespace zw
         {
             return iterator(_head);
         }
-        // const_iterator begin();
-        // const_iterator end();
+        const_iterator begin() const
+        {
+            return const_iterator(_head->_next);
+        }
+        const_iterator end() const
+        {
+            return const_iterator(_head);
+        }
 
 
         ///////////////////////////////////////////////////////////////
@@ -180,17 +242,39 @@ namespace zw
             _size--;
             return iterator(cur);
         }
-        void clear();
+        void clear()
+        {
+            auto it = begin();
+            while(it != end())
+            {
+                it = erase(it);
+            }
+        }
+
         void swap(list<T>& l)
         {
             std::swap(_head, l._head);
             std::swap(_size, l._size);
         }
-    private:
-        void CreateHead();
 
+
+    private:
 
         Node* _head;
         size_t _size;
     };
+
+    template<class Container>
+        void PrintContainer(const Container& con)
+        {
+            typename Container::const_iterator it = con.begin();
+            while(it != con.end())
+            {
+                cout << *it << " ";
+                ++it;
+            }
+            cout << endl;
+        }
+
+
 };
