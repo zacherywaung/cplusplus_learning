@@ -10,12 +10,32 @@ namespace zw
         queue()
         {}
 
-        void push()
+        void push(const T& x)
         {
-            ;
+            con.push_back(x);
+        }
+
+        void pop()
+        {
+            con.pop_front();
+        }
+
+        const T& top() const
+        {
+            return con.front();
+        }
+
+        size_t size()
+        {
+            return con.size();
+        }
+
+        bool empty()
+        {
+            return con.empty();
         }
 
     private:
         Container con;
-    }
+    };
 }
