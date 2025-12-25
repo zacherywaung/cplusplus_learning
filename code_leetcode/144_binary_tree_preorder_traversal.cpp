@@ -13,6 +13,10 @@
 // Output: [1,2,4,5,6,7,3,8,9]
 
 
+
+
+
+// Follow up: Recursive solution is trivial, could you do it iteratively?
 #include<vector>
 #include<stack>
 using namespace std;
