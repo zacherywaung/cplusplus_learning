@@ -9,9 +9,9 @@
 				"-std=c++11",
 				"-fdiagnostics-color=always",
 				"-g",
-				"${workspaceFolder}/code_leetcode/17_letter_combinations_of_phone_number.cpp",
+				"${workspaceFolder}/code_leetcode/692_top_k_frequent_words.cpp",
 				"-o",
-				"${workspaceFolder}/code_leetcode/17_letter_combinations_of_phone_number"
+				"${workspaceFolder}/code_leetcode/692_top_k_frequent_words"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
