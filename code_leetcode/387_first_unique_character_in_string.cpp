@@ -21,6 +21,8 @@
 // 1 <= s.length <= 105
 // s consists of only lowercase English letters.
 
+// hash
+
 #include<iostream>
 using namespace std;
 class Solution {
@@ -40,3 +42,24 @@ public:
         return -1;
     }
 };
+
+// unordered_map
+
+// class Solution {
+// public:
+//     int firstUniqChar(string s) {
+//         unordered_map<char, int> m;
+//         for(auto& c : s)
+//         {
+//             m[c]++;
+//         }
+//         for(int i = 0; i < s.size(); i++)
+//         {
+//             if(m[s[i]] == 1)
+//             {
+//                 return i;
+//             }
+//         }
+//         return -1;
+//     }
+// };
