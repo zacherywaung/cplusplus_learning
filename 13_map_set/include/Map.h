@@ -39,9 +39,15 @@ namespace zw
             return _t.End();
         }
 
-        bool Insert(const pair<K, V>& kv)
+        pair<iterator, bool> Insert(const pair<K, V>& kv)
         {
             return _t.Insert(kv);
+        }
+
+        V& operator[](const K& key)
+        {
+            pair<iterator, bool> ret = _t.Insert({key, V()});
+            return ret.first->second;
         }
 
 

@@ -42,6 +42,12 @@ void Test2()
     }
     cout << endl;
 
+    m1[10] = 5;
+
+    cout << m1[3] << endl; // 13
+    cout << m1[10] << endl; // 5
+
+
 }
 
 

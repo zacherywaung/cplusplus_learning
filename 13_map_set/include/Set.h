@@ -39,7 +39,7 @@ namespace zw
             return _t.End();
         }
 
-        bool Insert(const K& key)
+        pair<iterator, bool> Insert(const K& key)
         {
             return _t.Insert(key);
         }

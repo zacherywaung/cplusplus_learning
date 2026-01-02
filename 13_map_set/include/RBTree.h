@@ -157,13 +157,19 @@ namespace zw
             return ConstIterator(nullptr, _root);
         }
 
-        bool Insert(const T& data)
+        ~RBTree()
+        {
+            _Destory(_root);
+        }
+
+        pair<Iterator, bool> Insert(const T& data)
         {
             if(_root == nullptr)
             {
                 _root = new Node(data);
                 _root->_color = Color::Black;
-                return true;
+                return pair<Iterator, bool>{Iterator(_root, _root), true};
+                //return make_pair(Iterator(_root, _root), true);
             }
             KeyOfT kot;
             Node* cur = _root;
@@ -181,10 +187,11 @@ namespace zw
                     cur = cur->_right;
                 }
                 else{
-                    return false;
+                    return pair<Iterator, bool>{Iterator(cur, _root), false};
                 }
             }
             cur = new Node(data);
+            Node* newnode = cur;
             cur->_color = Color::RED;
             cur->_parent = parent;
             if(kot(parent->_data) > kot(data))
@@ -257,7 +264,7 @@ namespace zw
             }
             _root->_color = Color::Black;
 
-            return true;
+            return pair<Iterator, bool>{Iterator(newnode, _root), true};
         }
 
         // void Inorder()
@@ -338,6 +345,17 @@ namespace zw
         //     cout << root->_kv.first << ":" << root->_kv.second << endl;
         //     _Inorder(root->_right);
         // }
+
+        void _Destory(Node* root)
+        {
+            if(root == nullptr)
+            {
+                return;
+            }
+            _Destory(root->_left);
+            _Destory(root->_right);
+            delete root;
+        }
 
 
 
