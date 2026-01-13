@@ -190,8 +190,8 @@ namespace zw
                         while(cur)
                         {
                             size_t hashi = transfer(cur->_kv.first) % newtables.size();
-                            cur->_next = _tables[hashi];
-                            _tables[hashi] = cur;
+                            cur->_next = newtables[hashi];
+                            newtables[hashi] = cur;
 
                             cur = cur->_next;
                         }
@@ -223,6 +223,35 @@ namespace zw
                     cur = cur->_next;
                 }
                 return nullptr;
+            }
+
+            bool Erase(const K& key)
+            {
+                
+                hash transfer;
+                size_t hashi = transfer(key) % _tables.size();
+                Node* cur = _tables[hashi];
+                Node* prev = nullptr;
+                while(cur)
+                {
+                    if(cur->_kv.first == key)
+                    {
+                        if(prev == nullptr)
+                        {
+                            _tables[hashi] = cur->_next;
+                        }
+                        else
+                        {
+                            prev->_next = cur->_next;
+                        }
+                        delete cur;
+                        --_n;
+                        return true;
+                    }
+                    prev = cur;
+                    cur = cur->_next;
+                }
+                return false;
             }
 
         private:
