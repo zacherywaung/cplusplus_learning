@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <queue>
 
 namespace MatrixGraphModule
 {
@@ -80,6 +81,64 @@ namespace MatrixGraphModule
                 std::cout << std::endl;
             }
         }
+
+        void BFS(const V& src)
+        {
+            int srcIndex = GetIndex(src);
+            std::queue<int> q;
+            std::vector<bool> visited(_vertex.size(), false);
+            q.push(srcIndex);
+            visited[srcIndex] = true;
+            int layer = 1;
+            int layersize = 1;
+            while(!q.empty())
+            {
+                std::cout << "Layer" << layer << ":" << std::endl;
+                while(layersize--)
+                {
+                    int front = q.front();
+                    q.pop();
+                    std::cout << front << ":" << _vertex[front] << " ";
+                    for(int i = 0; i < _vertex.size(); i++)
+                    {
+                        if(_matrix[front][i] != MAX_W && visited[i] == false)
+                        {
+                            q.push(i);
+                            visited[i] = true;
+                        }
+                    }
+                }
+                std::cout << std::endl;
+                layer++;
+                layersize = q.size();
+            }
+            std::cout << std::endl;
+        }
+
+
+        void _DFS(int index, std::vector<bool>& visited)
+        {
+            for(int i = 0; i < _vertex.size(); i++)
+            {
+                if(_matrix[index][i] != MAX_W && visited[i] == false)
+                {
+                    std::cout << i << ":" << _vertex[i] << " ";
+                    visited[i] = true;
+                    _DFS(i, visited);
+                }
+            }
+        }
+
+        void DFS(const V& src)
+        {
+            int srcIndex = GetIndex(src);
+            std::vector<bool> visited(_vertex.size(), false);
+            visited[srcIndex] = true;
+            std::cout << srcIndex << ":" << src << " ";
+            _DFS(srcIndex, visited);
+            std::cout << std::endl;
+        }
+
         ~Graph()
         {}
     private:

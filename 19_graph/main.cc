@@ -14,4 +14,10 @@ int main()
     g.AddEdge('d', 'c', 6);
     
     g.Print();
+
+    std::cout << std::endl;
+    std::cout << "BFS:" << std::endl;
+    g.BFS('a');
+    std::cout << "DFS:" << std::endl;
+    g.DFS('a');
 }
