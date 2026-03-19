@@ -20,4 +20,26 @@ int main()
     g.BFS('a');
     std::cout << "DFS:" << std::endl;
     g.DFS('a');
+
+    std::cout << "------------------------------" << std::endl;
+    Graph<char, int> x("abcdefghi", 9);
+    x.AddEdge('a', 'b', 4);
+    x.AddEdge('a', 'h', 8);
+    //g.AddEdge('a', 'h', 9);
+    x.AddEdge('b', 'c', 8);
+    x.AddEdge('b', 'h', 11);
+    x.AddEdge('c', 'i', 2);
+    x.AddEdge('c', 'f', 4);
+    x.AddEdge('c', 'd', 7);
+    x.AddEdge('d', 'f', 14);
+    x.AddEdge('d', 'e', 9);
+    x.AddEdge('e', 'f', 10);
+    x.AddEdge('f', 'g', 2);
+    x.AddEdge('g', 'h', 1);
+    x.AddEdge('g', 'i', 6);
+    x.AddEdge('h', 'i', 7);
+
+    Graph<char, int> minTree;
+    std::cout << "Kruskal min tree:  " << x.MinTreeKruskal(minTree) << std::endl;
+    minTree.Print();
 }

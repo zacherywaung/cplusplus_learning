@@ -5,6 +5,10 @@
 #include <vector>
 #include <map>
 #include <queue>
+#include <functional>
+#include "union_find_set.hpp"
+
+using namespace UnionFindSetModule;
 
 namespace MatrixGraphModule
 {
@@ -12,6 +16,8 @@ namespace MatrixGraphModule
     class Graph
     {
     public:
+        typedef Graph<V, W, MAX_W, Direction> Self;
+        Graph() = default;
         Graph(const V* vertexs, int n)
         {
             _vertex.reserve(n);
@@ -40,15 +46,20 @@ namespace MatrixGraphModule
             }
         }
 
-        void AddEdge(const V& src, const V& dst, const W& weight)
+        void _AddEdge(int srcIndex, int dstIndex, const W& weight)
         {
-            int srcIndex = GetIndex(src);
-            int dstIndex = GetIndex(dst);
             _matrix[srcIndex][dstIndex] = weight;
             if(Direction == false)
             {
                 _matrix[dstIndex][srcIndex] = weight;
             }
+        }
+
+        void AddEdge(const V& src, const V& dst, const W& weight)
+        {
+            int srcIndex = GetIndex(src);
+            int dstIndex = GetIndex(dst);
+            _AddEdge(srcIndex, dstIndex, weight);
         }
 
         void Print()
@@ -139,6 +150,74 @@ namespace MatrixGraphModule
             std::cout << std::endl;
         }
 
+        class Edge
+        {
+        public:
+            W _w;
+            int _src;
+            int _dst;
+        public:
+            Edge(int src, int dst, W w)
+                :_src(src)
+                ,_dst(dst)
+                ,_w(w)
+            {}
+
+            bool operator>(const Edge& o) const
+            {
+                return _w > o._w;
+            }
+        };
+
+        W MinTreeKruskal(Self& minTree)
+        {
+            // init
+            int n = _vertex.size();
+            minTree._vertex = _vertex;
+            minTree._vIndex = _vIndex;
+            minTree._matrix.resize(n);
+            for(int i = 0; i < n; i++)
+            {
+                minTree._matrix[i].resize(n, MAX_W);
+            }
+            // add all edge into min heap
+            std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> minheap;
+            for(int i = 0; i < n; i++)
+            {
+                for(int j = 0; j < n; j++)
+                {
+                    if(i < j && _matrix[i][j] != MAX_W)
+                    {
+                        minheap.push(Edge(i, j, _matrix[i][j]));
+                    }
+                }
+            }
+            // greedy
+            int count = 1;
+            W ret = W();
+            UnionFindSet ufs(n);
+            while(!minheap.empty())
+            {
+                Edge e = minheap.top();
+                minheap.pop();
+                if(ufs.FindRoot(e._src) != ufs.FindRoot(e._dst))
+                {
+                    ufs.Union(e._src, e._dst);
+                    ret += e._w;
+                    minTree._AddEdge(e._src, e._dst, e._w);
+                    count++;
+                }
+            }
+            if(count == n)
+            {
+                return ret;
+            }
+            else{
+                return W();
+            }
+            
+        }
+
         ~Graph()
         {}
     private:
@@ -157,4 +236,4 @@ namespace MatrixGraphModule
 
 
 
-# endif
+#endif
