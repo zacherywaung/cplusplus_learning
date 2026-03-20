@@ -42,4 +42,27 @@ int main()
     Graph<char, int> minTree;
     std::cout << "Kruskal min tree:  " << x.MinTreeKruskal(minTree) << std::endl;
     minTree.Print();
+
+    std::cout << "------------------------------" << std::endl;
+    const char* str = "syztx";
+    Graph<char, int, INT_MAX, true> y(str, strlen(str));
+    y.AddEdge('s', 't', 10);
+    y.AddEdge('s', 'y', 5);
+    y.AddEdge('y', 't', 3);
+    y.AddEdge('y', 'x', 9);
+    y.AddEdge('y', 'z', 2);
+    y.AddEdge('z', 's', 7);
+    y.AddEdge('z', 'x', 6);
+    y.AddEdge('t', 'y', 2);
+    y.AddEdge('t', 'x', 1);
+    y.AddEdge('x', 'z', 4);
+
+    std::vector<int> dist;
+    std::vector<int> parentPath;
+    y.Dijkstra('s', dist, parentPath);
+    std::cout << "Dijkstra shortest path:  " << std::endl;
+    y.Print();
+    std::cout << std::endl;
+    std::cout << "Define s as start node" << std::endl;
+    y.PrintShortPath('s', dist, parentPath);
 }

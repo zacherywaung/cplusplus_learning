@@ -6,6 +6,7 @@
 #include <map>
 #include <queue>
 #include <functional>
+#include <algorithm>
 #include "union_find_set.hpp"
 
 using namespace UnionFindSetModule;
@@ -216,6 +217,71 @@ namespace MatrixGraphModule
                 return W();
             }
             
+        }
+
+        void Dijkstra(const V& src, std::vector<W>& dist, std::vector<int>& pPath)
+        {
+            // init
+            int n = _vertex.size();
+            int srcIndex = GetIndex(src);
+            dist.resize(n, MAX_W);
+            pPath.resize(n, -1);
+            std::vector<bool> is_used(n, false);
+            dist[srcIndex] = W{};
+
+            for(int i = 0; i < n; i++)
+            {
+                // find min unused node u
+                W min = MAX_W;
+                int u = srcIndex;
+                for(int j = 0; j < n; j++)
+                {
+                    if(is_used[j] == false && dist[j] < min)
+                    {
+                        min = dist[j];
+                        u = j;
+                    }
+                }
+                is_used[u] = true;
+                // update other node's dist and pPath
+                for(int k = 0; k < n; k++)
+                {
+                    if(is_used[k] == false && _matrix[u][k] != MAX_W && dist[u] + _matrix[u][k] < dist[k])
+                    {
+                        dist[k] = dist[u] + _matrix[u][k];
+                        pPath[k] = u;
+                    }
+                }
+            }
+        }
+
+        void PrintShortPath(const V& src, const std::vector<W>& dist, const std::vector<int>& pPath)
+        {
+            int n = _vertex.size();
+            int srcIndex = GetIndex(src);
+            for(int i = 0; i < n; i++)
+            {
+                if(srcIndex == i)
+                {
+                    continue;
+                }
+                // save path
+                std::vector<int> path;
+                int parent = i;
+                while(parent != srcIndex)
+                {
+                    path.emplace_back(parent);
+                    parent = pPath[parent];
+                }
+                path.emplace_back(srcIndex);
+                // print
+                std::reverse(path.begin(), path.end());
+                for(auto& e : path)
+                {
+                    std::cout << e << " -> ";
+                }
+                std::cout << "[" << dist[i] << "]" << std::endl;
+            }
         }
 
         ~Graph()
